@@ -1,7 +1,7 @@
 
 import styled from "styled-components";
 import { DescCardItems } from "../data";
-import {mobile} from "../responsive";
+import {mobile,smallMobile,smallLaptop} from "../responsive";
 
 const Container = styled.div`
   height: 80vh;
@@ -12,6 +12,7 @@ const Title = styled.h1`
   color: #03004e;
   font-size: 64px;
   ${mobile({fontSize:"1.5rem",marginTop:"0"})};
+  ${smallMobile({marginTop:"50px"})};
   text-align: center;
 `;
 const Grid = styled.div`
@@ -20,6 +21,7 @@ const Grid = styled.div`
   grid-template-columns: repeat(5, 1fr);
   padding: 0 100px;
   ${mobile({padding:"10px",gap:"0"})};
+  ${smallLaptop({padding:"5px"})};
   gap: 0 20px;
 `;
 const GridItem = styled.div`
@@ -33,7 +35,8 @@ const GridDescItem = styled.div`
   align-items: center;
   justify-content: flex-start;
   flex-direction: column;
-  ${mobile({width:"85px"})};
+  ${mobile({width:"100%"})};
+  ${smallMobile({width:"70px"})};
 `;
 const Shapes = styled.div`
   display: flex;
@@ -44,7 +47,8 @@ const Shapes = styled.div`
 const Square = styled.div`
   width: 120px;
   height: 120px;
-  ${mobile({width:"65px",height:"65px"})};
+  ${mobile({width:"80px",height:"80px"})};
+  ${smallMobile({width:"40px",height:"40px"})};
   border-radius: 10px;
   background-color: ${(props) => props.color};
   box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
@@ -86,12 +90,13 @@ const CardTitle = styled.h3`
   color: #03004e;
   margin-bottom: 10px;
   ${mobile({fontSize:"0.8rem"})};
+  ${smallMobile({fontSize:"0.7rem"})};
 `;
 const CardDesc = styled.p`
   text-align: center;
   color: #03004e;
   ${mobile({fontSize:"0.6rem"})};
-
+  ${smallMobile({fontSize:"0.5rem"})};
 `;
 
 const Description = () => {
@@ -101,7 +106,7 @@ const Description = () => {
       <Grid>
         {DescCardItems.map((item, index) => (
           <>
-            <GridItem>
+            <GridItem key={index}>
               <Shapes>
                 <Square color={item.color}>
                   <SquareImage src={item.img}></SquareImage>
@@ -124,7 +129,7 @@ const Description = () => {
 
         {DescCardItems.map((item, index) => (
           <>
-            <GridDescItem>
+            <GridDescItem key={index}>
                 <CardTitle>{item.title}</CardTitle>
                     <CardDesc>{item.desc}</CardDesc>
             </GridDescItem>

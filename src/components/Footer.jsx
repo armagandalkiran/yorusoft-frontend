@@ -4,17 +4,21 @@ import rightArrow from "../svgs/right_arrow.svg";
 import instagram from "../svgs/instagram.svg";
 import linkedin from "../svgs/linkedin.svg";
 import whatsapp from "../svgs/whatsapp.svg";
-import {mobile} from "../responsive";
+import {mobile,smallLaptop} from "../responsive";
+import Modal from "../components/Modal";
+import {useState} from "react";
 
 const Container = styled.footer`
     display:flex;
     align-items:center;
     justify-content:center;
+    position:relative;
 `
 const Wrapper = styled.div`
     border-top:1px solid #c4c4c4;
     width:90%;
-    padding: 20px 20px;
+    padding:20px;
+    ${smallLaptop({padding:"10px"})};
     ${mobile({
         display:"flex",
         alignItems:"center",
@@ -67,6 +71,7 @@ const PlanArrowImage = styled.img`
 const OthersTitle = styled.h2`
    color:#5668D1;
    font-size:1.75rem;
+   ${smallLaptop({fontSize:"1.1rem"})};
    ${mobile({marginTop:"40px",fontSize:"1.4rem"})};
 `
 const OtherCards = styled.div`
@@ -90,6 +95,7 @@ const ProductCardItem = styled.li`
     color:#696969;
     padding:1rem;
     font-size:1.5rem;
+    ${smallLaptop({fontSize:"0.9rem"})};
     ${mobile({fontSize:"1rem"})};
 `
 const ContactCard = styled.ul`
@@ -105,6 +111,7 @@ const ContactCardItem = styled.li`
     font-size:1.5rem;
 `
 const ContactImages = styled.img`
+    ${smallLaptop({width:"20px"})};
     ${mobile({width:"25px"})};
 `
 
@@ -131,6 +138,13 @@ const ReserveContainer = styled.p`
 `
 
 const Footer = () => {
+
+    const [isClicked,setIsClicked] = useState(false);
+
+    const handleClick = () => {
+        setIsClicked(current=>!current);
+    }
+
     return (
         <Container>
             <Wrapper>
@@ -149,7 +163,8 @@ const Footer = () => {
                     </PlanContainer>
                     <OtherCards>
                         <OthersTitle>Any question ?</OthersTitle>
-                        <QuestionButton>Create Ticket</QuestionButton>
+                        <QuestionButton onClick={handleClick}>Create Ticket</QuestionButton>
+                        <Modal onClick={handleClick} show={isClicked}></Modal>
                     </OtherCards>
                     <OtherCards>
                         <OthersTitle>Product</OthersTitle>

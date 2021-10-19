@@ -4,7 +4,7 @@ import backgroundImage from "../svgs/home_background.svg";
 import svgedTextImage from "../svgs/svged_text.svg";
 import arrow from "../svgs/arrow.svg";
 import Slider from "../components/Slider";
-import {mobile} from "../responsive";
+import {mobile,smallMobile,smallLaptop} from "../responsive";
 
 const Container = styled.div`
     height: 100vh;
@@ -29,6 +29,8 @@ const AnnouncementContainer = styled.div`
     align-items: center;
     justify-content: space-between;
     flex-direction: column;
+    margin-top:100px;
+    ${smallMobile({marginTop:"50px"})};
 `
 const MainText = styled.h1`
     text-align: center;
@@ -36,7 +38,9 @@ const MainText = styled.h1`
     font-size: 4rem;
     font-weight:900;
     color:#03004E;
+    ${smallLaptop({fontSize:"3rem"})};
     ${mobile({fontSize:"1.5rem"})};
+    ${smallMobile({fontSize:"1.2rem"})};
 `
 const SvgedText = styled.span`
     background-repeat: no-repeat;
@@ -61,6 +65,7 @@ const SubTextContainer = styled.div`
 const SubText = styled.p`
     font-size: 1.5rem;
     ${mobile({fontSize:"1rem"})};
+    ${smallMobile({fontSize:"0.8rem",padding:" 0 20px"})};
     color:#696969;
 `
 const SubColoredText = styled.span`
@@ -69,16 +74,19 @@ const SubColoredText = styled.span`
 const AnnouncementBottom = styled.div`
     margin-top:20px;
     width:100%;
+    ${smallMobile({padding:" 0 30px"})};
 `
 
 const ArrowIcon = styled.img`
     ${mobile({width:"4rem"})};
+    ${smallMobile({width:"3.5rem"})};
 `
 const Button = styled.button`
     margin-left:20px;
     width:291px;
     height:66px;
     ${mobile({width:"9rem",height:"4rem",fontSize:"1rem"})};
+    ${smallMobile({width:"6rem",height:"3rem",fontSize:"0.7rem"})};
     border-radius:50px;
     border:1px solid #FFE598;
     background-color:#FFE598;

@@ -1,17 +1,16 @@
 import styled from "styled-components";
 import Card from "../components/Card";
 import {PricingCardItems} from "../data";
-import {mobile} from "../responsive";
+import {smallLaptop} from "../responsive";
 
 const Container = styled.div`
-    height:80vh;
-    ${mobile({height:"auto"})};
+    ${smallLaptop({height:"auto"})};
 `
 const Wrapper = styled.div`
     height:100%;
     display:flex;
     justify-content:space-evenly;
-    ${mobile({flexDirection:"column",alignItems:"Center"})};
+    ${smallLaptop({flexDirection:"column",alignItems:"Center"})};
 `
 
 

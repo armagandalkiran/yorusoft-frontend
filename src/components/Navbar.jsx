@@ -1,7 +1,7 @@
 
 import navbarLogo from "../svgs/navbar_logo.svg";
 import styled from "styled-components";
-import {mobile} from "../responsive";
+import {mobile,smallLaptop} from "../responsive";
 
 const Container = styled.nav`
     position:absolute;
@@ -30,6 +30,7 @@ const Logo = styled.img`
 const Right = styled.div`
     padding:0 12rem;
     ${mobile({padding:"0 1rem"})};
+    ${smallLaptop({padding:"0"})};
 `
 const Links = styled.ul`
     

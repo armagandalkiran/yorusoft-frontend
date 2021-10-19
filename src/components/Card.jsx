@@ -1,12 +1,13 @@
 import styled from "styled-components";
 import Ribbon from "../svgs/ribbon.svg";
-import {mobile} from "../responsive";
+import {mobile,smallMobile} from "../responsive";
 
 const Container = styled.div`
     position:relative;
     padding:46px 40px;
     margin-top:${props=>props.type !== "Standard" && "50px"};
     ${mobile({marginTop:"0",padding:"38px 34px"})};
+    ${smallMobile({marginTop:"0",padding:"24px 21px"})};
 `
 const RibbonImage = styled.img`
     position:absolute;
@@ -14,6 +15,7 @@ const RibbonImage = styled.img`
     right:0;
     display:${props=>props.type !== "Standard" && "none"};
     ${mobile({width:"8rem"})};
+    ${smallMobile({width:"5rem"})};
 `
 const CardContainer = styled.div`
     display:flex;
@@ -97,22 +99,22 @@ const Button = styled.button`
 
 const Card = ({item}) => {
     return (
-        <Container type={item.title === "Standard" && "Standard"}>
-            <RibbonImage type={item.title === "Standard" && "Standard"} src={Ribbon}/>
-            <CardContainer type={item.title === "Standard" && "Standard"}>
-                <Title color={item.color} type={item.title === "Standard" && "Standard"}>{item.title}</Title>
-                <Price type={item.title === "Standard" && "Standard"}>
-                <PriceCurrency type={item.title === "Standard" && "Standard"}>$</PriceCurrency>{item.price}</Price>
+        <Container type={item.title === "Standard" ? "Standard" : undefined}>
+            <RibbonImage type={item.title === "Standard" ? "Standard" : undefined} src={Ribbon}/>
+            <CardContainer type={item.title === "Standard" ? "Standard" : undefined}>
+                <Title color={item.color} type={item.title === "Standard" ? "Standard" : undefined}>{item.title}</Title>
+                <Price type={item.title === "Standard" ? "Standard" : undefined}>
+                <PriceCurrency type={item.title === "Standard" ? "Standard" : undefined}>$</PriceCurrency>{item.price}</Price>
                 <Desc>{item.desc}</Desc>
                 {item.features.map((featureItem,index)=>(
-                    <Features color={(item.features.length - 1) === index ? "white" : "#EEE8E8"}>
+                    <Features key={index} color={(item.features.length - 1) === index ? "white" : "#EEE8E8"}>
                         <ImageContainer>
                             <FeatureImg alt="img" src={featureItem.img}/>
                         </ImageContainer>
                         <FeatureDesc color={featureItem.color}>{featureItem.feature}</FeatureDesc>
                     </Features>
                 ))}
-                <Button type={item.title === "Standard" && "Standard"}>Contact Us</Button>
+                <Button type={item.title === "Standard" ? "Standard" : undefined}>Contact Us</Button>
             </CardContainer>
         </Container>
     )

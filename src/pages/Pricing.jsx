@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import Cards from "../components/Cards";
-import {mobile} from "../responsive";
+import {mobile,smallLaptop} from "../responsive";
 
 const Container = styled.div`
     background:linear-gradient(-190deg,#1EA5FC,#C5B0FF 60%,transparent 0);
@@ -10,6 +10,7 @@ const Title = styled.h2`
     font-size:3rem;
     text-align:center;
     padding:4rem;
+    ${smallLaptop({fontSize:"2.5rem"})};
     ${mobile({fontSize:"1.3rem"})};
 `
 const PricingBottom = styled.div`
@@ -59,6 +60,7 @@ const Button = styled.button`
     font-weight:bold;
     margin-top:60px;
     cursor:pointer;
+    ${smallLaptop({width:"30%",fontSize:"1rem"})};
     ${mobile({width:"50%",fontSize:"0.8rem"})};
 `
 
