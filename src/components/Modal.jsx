@@ -7,7 +7,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { mobile } from "../responsive";
+import { mobile,smallMobile } from "../responsive";
 
 const GlobalStyle = createGlobalStyle`
   body {
@@ -21,7 +21,9 @@ const ModalContainer = styled.div`
   left: 50%;
   transform: translate(-50%, -50%);
   width: 40rem;
-  height: 46rem;
+  min-height: 40rem;
+  ${mobile({ width: "20rem", minHeight:"26rem" })}
+  ${smallMobile({ width: "15rem", minHeight:"19rem" })}
   background-color: white;
   border-radius: 5px;
   box-shadow: 0 3rem 5rem rgba(0, 0, 0, 0.3);
@@ -31,9 +33,12 @@ const ModalContainer = styled.div`
   transition: opacity 0.5s linear;
   padding: 1rem;
 `;
+
 const Message = styled.p`
   color: #03004e;
   font-size: 2rem;
+  ${mobile({ fontSize: "1.2rem"})}
+  ${smallMobile({ fontSize: "0.9rem" })}
   font-weight: bold;
   padding: 1rem;
   border-bottom: 1px solid #03004e;
@@ -44,11 +49,12 @@ const Form = styled.form`
   flex-direction: column;
   align-items: center;
   padding: 20px 10px;
-  height: 75%;
+  ${mobile({padding: "15px 5px"})};
 `;
 const Label = styled.label`
   padding: 20px 0;
   width: 80%;
+  ${smallMobile({padding: "10px 0",fontSize:"0.8rem" })}
 `;
 const Input = styled.input`
   width: 80%;
@@ -61,17 +67,19 @@ const Input = styled.input`
 const Textarea = styled.textarea`
   resize: none;
   width: 80%;
-  height: 50%;
+  min-height:12rem;
   margin-bottom: 20px;
   padding: 10px;
   &:focus {
     outline: none;
   }
+  ${mobile({minHeight: "8rem",marginTop:"1px"})}
 `;
 
 const ErrorMessage = styled.p`
   color: red;
   padding: 0.5rem;
+  ${smallMobile({fontSize:"0.8rem" })}
 `;
 
 const SubmitButton = styled.button`
