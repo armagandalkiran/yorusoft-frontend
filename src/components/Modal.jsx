@@ -7,6 +7,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { mobile } from "../responsive";
 
 const GlobalStyle = createGlobalStyle`
   body {
@@ -21,6 +22,10 @@ const ModalContainer = styled.div`
   transform: translate(-50%, -50%);
   width: 40rem;
   height: 46rem;
+  ${mobile({
+    width: "20rem",
+    height: "26rem"
+  })};
   background-color: white;
   border-radius: 5px;
   box-shadow: 0 3rem 5rem rgba(0, 0, 0, 0.3);
