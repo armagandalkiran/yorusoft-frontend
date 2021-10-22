@@ -1,145 +1,100 @@
 import styled from "styled-components";
 import { DescCardItems } from "../data";
-import { mobile, smallMobile, smallLaptop } from "../responsive";
+import { mobile, smallMobile } from "../responsive";
+import useWindowSize from "../hooks/useWindowSize";
+import StepCard from "../components/StepCard";
 
 const Container = styled.div`
-  height: 80vh;
-  ${mobile({ height: "70vh" })};
+height:60vh;
+padding:0 100px;
+  ${mobile({ height:"100%",padding:"20px 0"})};
+`;
+
+const Wrapper = styled.div`
+  display: flex;
+  flex-direction: ${(props) => props.mobileWrapper.direction};
+  margin-top: ${(props) => props.mobileWrapper.marginTop};
+  padding: ${(props) => props.mobileWrapper.padding};
+`;
+
+Wrapper.defaultProps = {
+  mobileWrapper: {
+    direction: "row",
+    marginTop:"150px",
+    padding:"0 150px",
+  },
+};
+
+const mobileWrapper = {
+  direction: "column",
+  marginTop:"0",
+  padding:"0",
+};
+
+const CardWrapper = styled.div`
+  position: relative;
 `;
 const Title = styled.h1`
   margin-top: 90px;
+  margin-bottom:90px;
   color: #03004e;
   font-size: 64px;
   ${mobile({ fontSize: "1.5rem", marginTop: "0" })};
   ${smallMobile({ marginTop: "50px" })};
   text-align: center;
 `;
-const Grid = styled.div`
-  height: 60vh;
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  padding: 0 100px;
-  ${mobile({ padding: "10px", gap: "0" })};
-  ${smallLaptop({ padding: "5px" })};
-  gap: 0 20px;
-`;
-const GridItem = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-`;
-const GridDescItem = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  flex-direction: column;
-  ${mobile({ width: "100%" })};
-  ${smallMobile({ width: "70px" })};
-`;
-const Shapes = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: space-evenly;
-`;
 
-const Square = styled.div`
-  width: 120px;
-  height: 120px;
-  ${mobile({ width: "80px", height: "80px" })};
-  ${smallMobile({ width: "40px", height: "40px" })};
-  border-radius: 10px;
-  background-color: ${(props) => props.color};
-  box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-  ${"" /*how it works ? */}
-  display:flex;
-  align-items: center;
-  justify-content: center;
-`;
-
-const SquareImage = styled.img`
-  ${mobile({ width: "20px" })};
-`;
-
-const Circle = styled.div`
-  width: 20px;
-  height: 20px;
-  border-radius: 50%;
-  background-color: ${(props) => props.color};
-  position: absolute;
-  right: ${(props) => props.type === "right" && 0};
-  left: ${(props) => props.type === "left" && 0};
-  ${mobile({ display: "none" })};
-`;
 const LineContainer = styled.div`
   display: flex;
   align-items: center;
   width: 100%;
   justify-content: space-evenly;
+  ${mobile({ flexDirection: "column", height: "100px" })};
 `;
 const HorizontalLine = styled.hr`
   width: 15px;
-  border: 3px solid #e5e5e5;
-  ${mobile({ width: "5px", border: "1px solid #e5e5e5" })};
+  border: 2px solid #e5e5e5;
+  ${mobile({
+    width: "5px",
+    border: "1px solid #e5e5e5",
+    transform: "rotate(90deg)",
+  })};
   background-color: #e5e5e5;
-`;
-const CardTitle = styled.h3`
-  text-align: center;
-  color: #03004e;
-  margin-bottom: 10px;
-  ${mobile({ fontSize: "0.8rem" })};
-  ${smallMobile({ fontSize: "0.7rem" })};
-`;
-const CardDesc = styled.p`
-  text-align: center;
-  color: #03004e;
-  ${mobile({ fontSize: "0.6rem" })};
-  ${smallMobile({ fontSize: "0.5rem" })};
 `;
 
 const Description = () => {
+  const { width } = useWindowSize();
+
   return (
     <Container>
       <Title>How it works ?</Title>
-      <Grid>
-        {DescCardItems.map((item, index) => (
-          <>
-            <GridItem key={index}>
-              <Shapes>
-                <Square color={item.color}>
-                  <SquareImage src={item.img}></SquareImage>
-                </Square>
-                <Circle
-                  type={index === 2 ? "left" : "right"}
+        <Wrapper mobileWrapper={width <= 1000 ? mobileWrapper : false}>
+          {DescCardItems.map((item, index) => (
+            <>
+              <CardWrapper>
+                <StepCard
+                  left={item.left}
+                  right={item.right}
                   color={item.color}
-                ></Circle>
-                {index === 1 && (
-                  <Circle type="left" color={item.color}></Circle>
-                )}
-              </Shapes>
-            </GridItem>
-            {index < 2 && (
-              <GridItem>
+                  icon={item.img}
+                  descriptionTitle={item.title}
+                  description={item.desc}
+                  mobile={width <= 1000 ? mobile : false}
+                />
+              </CardWrapper>
+
+              {index < 2 ? (
                 <LineContainer>
                   {[...Array(9).keys()].map((item, index) => (
-                    <HorizontalLine key={index}></HorizontalLine>
+                    <>
+                      <HorizontalLine key={index}></HorizontalLine>
+                    </>
                   ))}
                 </LineContainer>
-              </GridItem>
-            )}
-          </>
-        ))}
-
-        {DescCardItems.map((item, index) => (
-          <>
-            <GridDescItem key={index}>
-              <CardTitle>{item.title}</CardTitle>
-              <CardDesc>{item.desc}</CardDesc>
-            </GridDescItem>
-            {index < 2 && <GridItem></GridItem>}
-          </>
-        ))}
-      </Grid>
+              ) : null}
+            </>
+          ))}
+        </Wrapper>
     </Container>
   );
 };

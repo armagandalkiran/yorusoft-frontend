@@ -32,6 +32,7 @@ export const DescCardItems = [
     desc: "Wonder twenty hunted and put income set desire expect. Am cottage calling.",
     color: "#FFE598",
     img: extension,
+    right:true,
   },
   {
     id: 2,
@@ -39,6 +40,8 @@ export const DescCardItems = [
     desc: "Wonder twenty hunted and put income set desire expect. Am cottage calling.",
     color: "#1EA5FC",
     img: code,
+    left:true,
+    right:true,
   },
   {
     id: 3,
@@ -46,6 +49,7 @@ export const DescCardItems = [
     desc: "Wonder twenty hunted and put income set desire expect. Am cottage calling.",
     color: "#5668D1",
     img: payment,
+    left:true,
   },
 ];
 
